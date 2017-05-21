@@ -13,19 +13,58 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.ListView;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class Principal extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener{
 
     private Button btVerPrerecetas;
+    private ListView listaLogica;
+    private DatabaseReference mDatabase;
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_principal);
 
+        mDatabase = FirebaseDatabase.getInstance().getReferenceFromUrl("https://deli-da2fd.firebaseio.com/Recetas");
+
+        Firebase
+
+
+
+        /*
+        RecetaPrevia recetaPrevia_datos[] = new RecetaPrevia[]{
+                new RecetaPrevia(R.drawable.ic_menu_gallery,"Panterita"),
+                new RecetaPrevia(R.drawable.ic_menu_gallery,"Arroz"),
+                new RecetaPrevia(R.drawable.ic_menu_gallery,"Pollo"),
+                new RecetaPrevia(R.drawable.ic_menu_gallery,"Pechuga de perro"),
+                new RecetaPrevia(R.drawable.ic_menu_gallery,"Pechuga de gato"),
+                new RecetaPrevia(R.drawable.ic_menu_gallery,"Pechuga de perico"),
+                new RecetaPrevia(R.drawable.ic_menu_gallery,"Bombon de chocolate balnco y chispas de chocolate"),
+                new RecetaPrevia(R.drawable.ic_menu_gallery,"Panterita asada")
+        };*/
+
+        RecetaPreviaAdaptador adaptador= new RecetaPreviaAdaptador(this,R.layout.listview_item_row,recetaPrevia_datos);
 
         btVerPrerecetas = (Button) findViewById(R.id.btVerPrerecetas);
+        listaLogica = (ListView) findViewById(R.id.lvRecetas);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+
+        listaLogica.setAdapter(adaptador);
+
+        listaLogica.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                TextView v = (TextView)view.findViewById(R.id.tvNombreReceta);
+                Toast.makeText(getApplicationContext(),v.getText(),Toast.LENGTH_SHORT).show();
+            }
+        });
 
         setSupportActionBar(toolbar);
         btVerPrerecetas.setOnClickListener(this);
