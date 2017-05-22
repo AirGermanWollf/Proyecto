@@ -9,6 +9,8 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+
 /**
  * Created by MIGUEL on 21/05/2017.
  */
@@ -16,9 +18,9 @@ import android.widget.TextView;
 public class RecetaPreviaAdaptador extends ArrayAdapter<RecetaPrevia>{
     Context myContext;
     int myLayoutResourceID;
-    RecetaPrevia myData[] = null;
+    ArrayList<RecetaPrevia> myData = null;
 
-    public RecetaPreviaAdaptador(Context contexto,int LayoutResourceID, RecetaPrevia[] data){
+    public RecetaPreviaAdaptador(Context contexto, int LayoutResourceID, ArrayList<RecetaPrevia> data){
         super(contexto,LayoutResourceID,data);
 
         this.myContext=contexto;
@@ -43,7 +45,7 @@ public class RecetaPreviaAdaptador extends ArrayAdapter<RecetaPrevia>{
             holder=(RecetaPreviaHolder)row.getTag();
         }
 
-        RecetaPrevia recetaPrevia=myData[position];
+        RecetaPrevia recetaPrevia=myData.get(position);
         holder.textView.setText(recetaPrevia.nombre);
         holder.imagen.setImageResource(recetaPrevia.icono);
 

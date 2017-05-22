@@ -23,11 +23,15 @@ import com.firebase.ui.database.FirebaseListAdapter;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.util.AbstractList;
+import java.util.ArrayList;
+
 public class Principal extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener{
 
     private Button btVerPrerecetas;
     private ListView listaLogica;
     private DatabaseReference mDatabase;
+    ArrayList<RecetaPrevia> recetaPreviaDatos;
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,15 +44,16 @@ public class Principal extends AppCompatActivity implements NavigationView.OnNav
         ) {
             @Override
             protected void populateView(View v, RecetaPrevia model, int position) {
-                new RecetaPrevia(R.drawable.ic_menu_gallery,model.nombre);
+                recetaPreviaDatos.add(position,new RecetaPrevia(R.drawable.ic_menu_gallery,model.nombre));
 
             }
         };
 
 
 
-        /*
-        RecetaPrevia recetaPrevia_datos[] = new RecetaPrevia[]{
+/*
+        RecetaPrevia recetaPrevia_datos[] = new RecetaPrevia[];
+                {
                 new RecetaPrevia(R.drawable.ic_menu_gallery,"Panterita"),
                 new RecetaPrevia(R.drawable.ic_menu_gallery,"Arroz"),
                 new RecetaPrevia(R.drawable.ic_menu_gallery,"Pollo"),
@@ -59,14 +64,14 @@ public class Principal extends AppCompatActivity implements NavigationView.OnNav
                 new RecetaPrevia(R.drawable.ic_menu_gallery,"Panterita asada")
         };*/
 
-        //RecetaPreviaAdaptador adaptador= new RecetaPreviaAdaptador(this,R.layout.listview_item_row,recetaPrevia_datos);
+        RecetaPreviaAdaptador adaptador= new RecetaPreviaAdaptador(this,R.layout.listview_item_row,recetaPreviaDatos);
 
         btVerPrerecetas = (Button) findViewById(R.id.btVerPrerecetas);
         listaLogica = (ListView) findViewById(R.id.lvRecetas);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
 
         //Asigando el adaptador para las listas
-        listaLogica.setAdapter(firebaseListAdapter);
+        //listaLogica.setAdapter(firebaseListAdapter);
 
         listaLogica.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
