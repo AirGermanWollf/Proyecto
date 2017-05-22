@@ -6,15 +6,15 @@ package unimet.proyecto;
 
 public class RecetaPrevia {
     public int icono;
-    public String titulo;
+    public String nombre;
 
     public RecetaPrevia(){
         super();
     }
 
-    public RecetaPrevia(int icono, String titulo){
+    public RecetaPrevia(int icono, String nombre){
         super();
         this.icono=icono;
-        this.titulo=titulo;
+        this.nombre=nombre;
     }
 }

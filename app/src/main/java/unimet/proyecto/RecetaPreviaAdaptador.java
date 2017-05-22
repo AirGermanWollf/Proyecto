@@ -44,7 +44,7 @@ public class RecetaPreviaAdaptador extends ArrayAdapter<RecetaPrevia>{
         }
 
         RecetaPrevia recetaPrevia=myData[position];
-        holder.textView.setText(recetaPrevia.titulo);
+        holder.textView.setText(recetaPrevia.nombre);
         holder.imagen.setImageResource(recetaPrevia.icono);
 
         return row;

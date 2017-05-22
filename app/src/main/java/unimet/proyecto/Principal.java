@@ -19,6 +19,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.firebase.ui.database.FirebaseListAdapter;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -34,7 +35,15 @@ public class Principal extends AppCompatActivity implements NavigationView.OnNav
 
         mDatabase = FirebaseDatabase.getInstance().getReferenceFromUrl("https://deli-da2fd.firebaseio.com/Recetas");
 
-        Firebase
+        FirebaseListAdapter<RecetaPrevia> firebaseListAdapter=new FirebaseListAdapter<RecetaPrevia>(
+                this,RecetaPrevia.class,android.R.layout.simple_list_item_1,mDatabase
+        ) {
+            @Override
+            protected void populateView(View v, RecetaPrevia model, int position) {
+                new RecetaPrevia(R.drawable.ic_menu_gallery,model.nombre);
+
+            }
+        };
 
 
 
@@ -50,13 +59,14 @@ public class Principal extends AppCompatActivity implements NavigationView.OnNav
                 new RecetaPrevia(R.drawable.ic_menu_gallery,"Panterita asada")
         };*/
 
-        RecetaPreviaAdaptador adaptador= new RecetaPreviaAdaptador(this,R.layout.listview_item_row,recetaPrevia_datos);
+        //RecetaPreviaAdaptador adaptador= new RecetaPreviaAdaptador(this,R.layout.listview_item_row,recetaPrevia_datos);
 
         btVerPrerecetas = (Button) findViewById(R.id.btVerPrerecetas);
         listaLogica = (ListView) findViewById(R.id.lvRecetas);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
 
-        listaLogica.setAdapter(adaptador);
+        //Asigando el adaptador para las listas
+        listaLogica.setAdapter(firebaseListAdapter);
 
         listaLogica.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
