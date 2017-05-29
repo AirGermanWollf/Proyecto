@@ -22,12 +22,9 @@
 
     <ListView
         android:id="@+id/lvRecetas"
-        android:layout_width="320dp"
-        android:layout_height="427dp"
-        tools:layout_editor_absoluteX="32dp"
-        tools:layout_editor_absoluteY="16dp"
-        android:layout_alignParentTop="true"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignParentTop="true" />
 
 </RelativeLayout>
